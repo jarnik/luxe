@@ -20,6 +20,8 @@ import luxe.Log.*;
 
 @:autoBuild(luxe.macros.EntityRules.apply())
 class Entity extends Objects {
+    
+    public static var EVENT_ACTIVE_PATH_UPDATED:String = "active_path_updated";
 
         /** The map of attached components, by name. use .get to find components in children and from other components instead of accessing this unless you need to */
     public var components (get,never) : OrderedMap<String, Component>;
@@ -1281,6 +1283,8 @@ class Entity extends Objects {
     	{
     		c.update_active_path();
     	}
+        
+        this.events.fire(EVENT_ACTIVE_PATH_UPDATED);
     }
 
     function get_active_path() {
